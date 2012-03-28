@@ -2,7 +2,7 @@
 : host.bat
 : Nathan Crews
 : 01/08/2012
-: Provide Quick edit of windows host file while
+: Quick edit of windows host file while
 :   testing / developing websites.
 :##############################################:
 : NetBeans
