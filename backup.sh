@@ -32,19 +32,20 @@
 ########################################################
 
   # Friday Backup Count.
-  # This value controlls how many individual Friday
+  # This value controls how many individual Friday
   # Backup files are retained.
 CFRIDAY=3
 
   # Backup Count.
-  # This value controlls how many individual NON Friday
+  # This value controls how many individual NON Friday
   # Backup files are retained.
 CDAILY=7
 
   # Cpanel Backup Log File Location.
 log_dir="/usr/local/cpanel/logs/cpbackup"
 
-  # Cpbackup Backup destination location bak_dir="/cpbackup/cpbackup"
+  # Cpbackup Backup destination location 
+bak_dir="/cpbackup/cpbackup"
 
   # Today's backup folder name
 folder="eod"$(date --date="1 day ago" +%y%m%d%a)
@@ -53,9 +54,12 @@ folder="eod"$(date --date="1 day ago" +%y%m%d%a)
   # Used to search for backup to remove
 day=$(date --date="1 day ago" +%a)
 
-  # Retrive most recent file in log directory file=$(ls "$log_dir" | sort -n | tail -1)
+  # Retrieve most recent file in log directory 
+file=$(ls "$log_dir" | sort -n | tail -1)
  
-  # Test most recent log file to confirm it's Today's Log if test `find "$log_dir"/"$file" -mmin -1200` then  # Today's Log: continue
+  # Test most recent log file to confirm it's Today's Log 
+if test `find "$log_dir"/"$file" -mmin -1200` 
+then  # Today's Log: continue
     
   output=$(tail -2 "$log_dir"/"$file")
   
