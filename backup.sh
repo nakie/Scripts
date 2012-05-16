@@ -10,7 +10,7 @@
 # Friday backup is removed.
 # Backup creation/removal is 1 for 1 so if the total 
 # number of backups retained needs to change it will 
-# need to be done manuall.
+# need to be done manually.
 #
 # The cron job that fires this is:
 # 0 5 * * 1-6 /usr/local/bin/ics/test/backup.sh 
@@ -39,7 +39,7 @@ CFRIDAY=3
   # Backup Count.
   # This value controls how many individual NON Friday
   # Backup files are retained.
-CDAILY=7
+CDAILY=6
 
   # Cpanel Backup Log File Location.
 log_dir="/usr/local/cpanel/logs/cpbackup"
@@ -87,6 +87,7 @@ then  # Today's Log: continue
         then
                   # Get name of oldest Friday backup to be Removed.
 		remove=$(ls "$bak_dir" | grep "eod" | grep -m 1 "$day") 
+
 		if test $(ls "$bak_dir" | grep "eod" | wc -l) -gt $CFRIDAY
 		then
                         echo "Friday Backup"
