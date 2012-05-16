@@ -97,24 +97,26 @@ then  # Today's Log: continue
                 echo $remove
             fi
         else
-		  # Get name of oldest NON Friday backup to be removed.
-		remove=$(ls "$bak_dir" | grep "eod" | grep -v "Fri")
+              # Get name of oldest NON Friday backup to be removed.
+            remove=$(ls "$bak_dir" | grep -v "Fri" | grep -m 1 "eod")
 
-		if test $(ls "$bak_dir" | grep "eod" | wc -l) -gt $CDAILY
-		then
-                        echo "Daily Backup"
-			rm -rf $bak_dir/$remove
-			removed="YES"
-                fi
+            if test $(ls "$bak_dir" | grep "eod" | grep -v "Fri" | wc -l) -gt $CDAILY
+            then
+                echo "Daily Backup"
+                rm -rf $bak_dir/$remove
+                #removed="YES"
+                echo "Removing"
+                echo $remove
+            fi
         fi
 
-	if [ $removed == "YES" ]
-	then
-		echo "Removing old backup named:"
-		echo $remove
+	#if [ $removed == "YES" ]
+	#then
+		#echo "Removing old backup named:"
+		#echo $remove
 
 		#rm -rf $bak_dir/$remove
-	fi
+	#fi
 
      fi
 
