@@ -85,15 +85,17 @@ then  # Today's Log: continue
           #Remove backup 
         if [ $day == "Fri" ]
         then
-                  # Get name of oldest Friday backup to be Removed.
-		remove=$(ls "$bak_dir" | grep "eod" | grep -m 1 "$day") 
+            # Get name of oldest Friday backup to be Removed.
+            remove=$(ls "$bak_dir" | grep "eod" | grep -m 1 "$day") 
 
-		if test $(ls "$bak_dir" | grep "eod" | wc -l) -gt $CFRIDAY
-		then
-                        echo "Friday Backup"
-			rm -rf $bak_dir/$remove
-			removed="YES"	
-		fi
+            if test $(ls "$bak_dir" | grep "Fri" | wc -l) -gt $CFRIDAY
+            then
+                echo "Friday Backup"
+                rm -rf $bak_dir/$remove
+                #removed="YES"	
+                echo "Removing"
+                echo $remove
+            fi
         else
 		  # Get name of oldest NON Friday backup to be removed.
 		remove=$(ls "$bak_dir" | grep "eod" | grep -v "Fri")
