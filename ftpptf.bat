@@ -5,7 +5,10 @@
 :: Launches a FTP Session and executes the commands
 :: inside ftpcmd.dat Once Done ftpcmd.dat is removed
 
+:: Do not print out commands
 @echo off
+
+:: Put username / password authentication commands into  dat file.
 echo user %2 > ftpcmd.dat
 echo %3 >> ftpcmd.dat
 
@@ -17,7 +20,13 @@ echo %3 >> ftpcmd.dat
 echo bin>> ftpcmd.dat
 echo ls >> ftpcmd.dat
 
-:: End Commands
+:: End FTP Commands
+
+:: Add Quit FTP Command to dat file
 echo quit >> ftpcmd.dat
+
+:: Lauch FTP from command dat file.
 ftp -n -s:ftpcmd.dat %1
+
+:: Delete FTP command dat file when through.
 del ftpcmd.dat /q
