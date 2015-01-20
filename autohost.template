@@ -1,0 +1,52 @@
+<VirtualHost *:80>
+#ZEND-{8B9B9923C44D1D931B91543933C16106}
+# USED4ZEND - Include "/usr/local/zend/etc/sites.d/zend-default-vhost-80.conf"
+#ZEND-{8B9B9923C44D1D931B91543933C16106}
+
+        ServerAdmin autohost.email
+        ServerName autohost.name.saturn.com
+        ServerAlias autohost.alias
+
+        DocumentRoot autohost.docroot
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+        <Directory autohost.docroot>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride None
+                Order allow,deny
+                allow from all
+        </Directory>
+
+        ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+        <Directory "/usr/lib/cgi-bin">
+                AllowOverride None
+                Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+                Order allow,deny
+                Allow from all
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    Alias /doc/ "/usr/share/doc/"
+    <Directory "/usr/share/doc/">
+        Options Indexes MultiViews FollowSymLinks
+        AllowOverride None
+        Order deny,allow
+        Deny from all
+        Allow from 127.0.0.0/255.0.0.0 ::1/128
+    </Directory>
+
+</VirtualHost>
+#ZEND-{B58F79A4651D489047B6E74367A805B0}
+# USED4ZEND Include "/usr/local/zend/etc/sites.d/globals-*.conf"
+# USED4ZEND Include "/usr/local/zend/etc/sites.d/vhost_*.conf"
+#ZEND-{B58F79A4651D489047B6E74367A805B0}
+

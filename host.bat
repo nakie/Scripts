@@ -14,16 +14,26 @@
 start notepad c:\Windows\system32\drivers\etc\hosts
 EXIT
 
+: Look for Notepadd++ 32Bit and 
 IF EXIST "%ProgramFiles%\Notepad++\notepad++.exe" (
     : Notepad ++ is Installed change to its directory and run
     c:
     cd "%ProgramFiles%\Notepad++"
-    :start notepad++ c:\Windows\system32\drivers\etc\hosts
+    start notepad++ c:\Windows\system32\drivers\etc\hosts
     : Host file has been launched with notepad++ jump out of script.
-    :EXIT
+    EXIT
 }
 
-: Look for Notepad 2 Program... What I typically run
+: Look for Notepadd++ 64Bit and open What I typically run..
+IF EXIST "%ProgramFiles%\Notepad++\notepad++.exe" (
+    : Notepad ++ is Installed change to its directory and run
+    c:
+    cd "%ProgramFiles(x86)%\Notepad++"
+    start notepad++ c:\Windows\system32\drivers\etc\hosts
+    : Host file has been launched with notepad++ jump out of script.
+    EXIT
+}
+: Look for Notepad 2 Program... 
 IF EXIST "%ProgramFiles%\Notepad2\Notepad2.exe" (
 	: Notepad2 Is installed change to its directory and run
 	c:

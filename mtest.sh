@@ -10,26 +10,24 @@
 ##################################################
 
 # the number of messages in the queue that will trigger a warning email
-TRIGGER=800
+trigger=800
 
 # the email address to send the warning.
-EMAIL="webmasters@chooseics.com"
+email="webmasters@chooseics.com"
 
-# get message count from queue
-COUNT=`/usr/sbin/exim -bpc`
+count=`/usr/sbin/exim -bpc`
 
-# send warning if count is greater than
-# the predefined trigger
-if [ $COUNT -ge $TRIGGER ]
+if test `/usr/sbin/exim -bpc` -ge $trigger
 then
-
-        # Attach exim summary to email
-        # and put count in subject.
+		echo $count
         /usr/sbin/exim -bp |
         /usr/sbin/exiqsumm -s |
         /bin/grep -v "<>" |
         /usr/bin/uuencode summary.txt |
-        /bin/mail -s "Exim queue currently at $COUNT " $EMAIL
+        /bin/mail -s "Exim queue currently at " $email
 else
 :
 fi
+
+
+

@@ -24,6 +24,9 @@ for %%a in ( "%FOLDER%%MATCH%" ) do (
 
 	REM - Move contents of file into OUTFILE
 	more "%%a" >> "%FOLDER%%OUTFILE%"
+	REM - copy /b used in place of more to prevent extra
+	REM - SUB character from being appended to the end of the file
+	REM - TODO:: this needs to be udpated to reflect the current script.
 	
 	REM - Delete the file once it is copied 
 	REM - /P Prompts for confirmation before deleting.
