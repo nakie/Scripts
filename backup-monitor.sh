@@ -18,7 +18,7 @@
 #
 # This script will be triggered using the cpanel hook system.
 # use cpanel's manage_hook to register the hook.
-# /usr/local/cpanel/bin/manage_hooks add script /root/backup-monitor.sh --category System --event Backup --stage post
+# /usr/local/cpanel/bin/manage_hooks add script /usr/local/ics/backup-monitor.sh --category System --event Backup --stage post
 #
 #
 #######################################################
