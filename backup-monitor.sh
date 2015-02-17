@@ -24,4 +24,4 @@
 #######################################################
 
     # Update access/modified time for the backup check file after cpbackup run finishes.
-touch -am /usr/local/ics/backup/lastrun
+touch -am /usr/local/ics/cpbackup/lastrun
