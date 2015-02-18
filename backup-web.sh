@@ -34,7 +34,7 @@ ATTEMPTS=12
 MINUTES=30
 
     # Location of backup completion check file( Remote Server ).
-log_dir="/usr/local/cpanel/logs/cpbackup"
+log_dir="/usr/local/ics/cpbackup"
 
     # Name of backup check file
     # the presence and access/modify time
@@ -62,11 +62,11 @@ do
     then
         # now that we know the backup is for today and has completed
         # we will sync it to ICS's system.
-        # rsync -av -delete -e ssh $rmt_user@$rmt_server:$remote_dir $local_dir
+        # rsync -av -delete -e ssh $rmt_user@$rmt_server:$remote_dir"/" $local_dir
 
         echo "Backup Synchronization Started"
 
-        echo $remote_dir
+        rsync -av -delete -e ssh $rmt_user@$rmt_server:$remote_dir"/" $local_dir
         
         echo "Backup Synchronization Completed"
             # once backup is synchronized exit loop
