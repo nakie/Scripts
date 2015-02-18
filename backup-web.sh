@@ -15,9 +15,9 @@
 # chmod +x backup-web.sh
 #
 # The cron job that fires this is:
-# 0 5 * * 1-6 /usr/local/bin/ics/backup-web.sh 
-# which starts the script at 5 am Sunday through Friday 
-# skipping a rename on the Saturday backup.
+# 0 4 * * 1-6 /usr/local/ics/backup-web.sh 
+# which starts the script at 4 am Sunday through Friday 
+# skipping a download on the Saturday backup.
 #
 #
 #######################################################
@@ -33,8 +33,13 @@ ATTEMPTS=12
     # Delay between attempts in minutes.
 MINUTES=30
 
-    # Location of backup ( Remote Server ).
+    # Location of backup completion check file( Remote Server ).
 log_dir="/usr/local/cpanel/logs/cpbackup"
+
+    # Name of backup check file
+    # the presence and access/modify time
+    # of this file indicate the last run of cpbackup
+file="lastrun"
 
     # Cpbackup Backup destination location 
 remote_dir="/backup/"$(date  +%Y-%m-%d)
@@ -59,10 +64,11 @@ do
         # we will sync it to ICS's system.
         # rsync -av -delete -e ssh $rmt_user@$rmt_server:$remote_dir $local_dir
 
-        echo "Backup Synchroniation Started"
+        echo "Backup Synchronization Started"
 
+        echo $remote_dir
         
-        echo "Backup synchronization completed"
+        echo "Backup Synchronization Completed"
             # once backup is synchronized exit loop
         break
         
@@ -74,13 +80,13 @@ do
         
             #sleep $MINUTESm
             
-            # Use seconds rather than minutes while testing
+                # Use seconds rather than minutes while testing
             sleep $MINUTES
             
         else
             
             # on last loop send backup failure notification.
-            echo "Backup synchronization failed after 6 hours of trying"
+            echo "Backup synchronization failed after " $ATTEMPTS " attempts"
             
         fi
         
