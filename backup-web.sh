@@ -57,6 +57,8 @@ rmt_server="__SERVER__"
 for (( c=1; c<=$ATTEMPTS; c++ ))
 do
     
+    echo "testing backup check file"
+    
     # Confirm the Backup for today has completed.
     if test `ssh "$rmt_user"@"$rmt_server" find "$log_dir"/"$file" -mmin -720`
     then
@@ -73,20 +75,29 @@ do
         break
         
     else # Backup has not finished.. now what?
-    
+        
+        # used while testing
+        # echo "could not verify backup completed"
   
-        if [ $c!=12 ]
+        if [ $c != $ATTEMPTS ]
         then
         
-            #sleep $MINUTESm
+            # used while testing
+            # echo "failed " $c " times sleeping "
             
-                # Use seconds rather than minutes while testing
-            sleep $MINUTES
+            sleep $MINUTESm
+            
+            # Use seconds rather than minutes while testing
+            # sleep $MINUTES
             
         else
             
-            # on last loop send backup failure notification.
+                # on last loop send backup failure notification.
             echo "Backup synchronization failed after " $ATTEMPTS " attempts"
+            
+                # Send notification message with High Importance.
+                # Send message stored in file /usr/local/ics/backup-msg.txt
+            sendmail -t < /usr/local/ics/backup-msg.txt
             
         fi
         
