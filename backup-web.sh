@@ -85,7 +85,7 @@ do
             # used while testing
             # echo "failed " $c " times sleeping "
             
-            sleep $MINUTESm
+            sleep "$MINUTES"m
             
             # Use seconds rather than minutes while testing
             # sleep $MINUTES
