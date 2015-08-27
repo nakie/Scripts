@@ -14,7 +14,7 @@ echo $MAILTIME
 
 # Exim Date Example format - 2015-08-27 08:3
 
-LOGSTOREVIEW=$(exigrep "$MAILTIME" /var/log/exim_mainlog | exigrep "courier_login:" | perl -00ne '($from, $auth) = ( /\<\=\s(\S+).*?A\=courier\_login\:(\S+)/);if( uc($from) ne uc($auth) ){ print $from . " " . $auth . "\n" ; }')
+LOGSTOREVIEW=$(/usr/sbin/exigrep "$MAILTIME" /var/log/exim_mainlog | /usr/sbin/exigrep "courier_login:" | /usr/bin/perl -00ne '($from, $auth) = ( /\<\=\s(\S+).*?A\=courier\_login\:(\S+)/);if( uc($from) ne uc($auth) ){ print $from . " " . $auth . "\n" ; }')
 
 if [ -n "$LOGSTOREVIEW" ];
 then
