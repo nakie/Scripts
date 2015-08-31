@@ -8,9 +8,9 @@ EMAIL="ncrews@chooseics.com"
 # to match Exim's date format
 DAY=$(date +%Y-%m-%d)
 TIME=$(date --date="5 minutes ago" +%H:%M | cut -c1-4 )
-MAILTIME="$DAY"
-
-echo $MAILTIME
+MAILTIME="$DAY $TIME"
+# used testing the time output.
+#echo $MAILTIME
 
 # Exim Date Example format - 2015-08-27 08:3
 
